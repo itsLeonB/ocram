@@ -10,6 +10,7 @@ require (
 	github.com/itsLeonB/ezutil/v2 v2.2.0
 	github.com/itsLeonB/meq v0.1.0-alpha
 	github.com/joho/godotenv v1.5.1
+	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/rotisserie/eris v0.5.4
 	google.golang.org/api v0.247.0
 )
