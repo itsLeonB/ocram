@@ -34,6 +34,9 @@ func NewExpenseBillService(
 	if ocr == nil {
 		return nil, eris.New("ocr client cannot be nil")
 	}
+	if logger == nil {
+		return nil, eris.New("logger cannot be nil")
+	}
 	return &expenseBillServiceImpl{
 		textExtractedQueue,
 		uploadedQueue,

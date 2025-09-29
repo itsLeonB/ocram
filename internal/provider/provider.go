@@ -19,14 +19,26 @@ func ProvideAll(logger ezutil.Logger, cfg config.Config) (*Providers, error) {
 	db := meq.NewAsynqDB(logger, cfg.ToRedisOpts())
 	queues, err := ProvideQueues(db, logger)
 	if err != nil {
+		if e := db.Shutdown(); e != nil {
+			err = errors.Join(err, e)
+		}
 		return nil, err
 	}
 	clients, err := ProvideClients(cfg.ServiceAccount)
 	if err != nil {
+		if e := db.Shutdown(); e != nil {
+			err = errors.Join(err, e)
+		}
 		return nil, err
 	}
 	services, err := ProvideServices(clients, queues, logger)
 	if err != nil {
+		if e := db.Shutdown(); e != nil {
+			err = errors.Join(err, e)
+		}
+		if e := clients.Shutdown(); e != nil {
+			err = errors.Join(err, e)
+		}
 		return nil, err
 	}
 
