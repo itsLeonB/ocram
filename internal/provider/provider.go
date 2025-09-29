@@ -25,7 +25,7 @@ func ProvideAll(logger ezutil.Logger, cfg config.Config) (*Providers, error) {
 	if err != nil {
 		return nil, err
 	}
-	services, err := ProvideServices(clients, queues)
+	services, err := ProvideServices(clients, queues, logger)
 	if err != nil {
 		return nil, err
 	}
